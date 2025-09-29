@@ -600,6 +600,9 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
                 </View>
               </View>
             </View>
+          </View>
+
+          <View style={[styles.timePickerFooter, { borderTopColor: theme.border }]}>
             <TouchableOpacity
               style={[styles.timePickerButton, { backgroundColor: theme.secondary }]}
               onPress={() => {
