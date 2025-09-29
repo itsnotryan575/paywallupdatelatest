@@ -4,6 +4,9 @@ require File.join(File.dirname(`node --print "require.resolve('react-native/pack
 require 'json'
 podfile_properties = JSON.parse(File.read(File.join(__dir__, 'Podfile.properties.json'))) rescue {}
 
+# Pin PurchasesHybridCommon to a compatible version for RNPurchases 6.7.2
+$rc_purchases_hybrid_common_version = '6.3.2'
+
 ENV['RCT_NEW_ARCH_ENABLED'] = '0' if podfile_properties['newArchEnabled'] == 'false'
 ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = podfile_properties['EX_DEV_CLIENT_NETWORK_INSPECTOR']
 
@@ -15,6 +18,8 @@ prepare_react_native_project!
 
 target 'ARMi' do
   use_expo_modules!
+
+  pod 'PurchasesHybridCommon', $rc_purchases_hybrid_common_version
 
   if ENV['EXPO_USE_COMMUNITY_AUTOLINKING'] == '1'
     config_command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"];
